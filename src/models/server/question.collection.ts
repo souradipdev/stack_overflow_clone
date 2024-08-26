@@ -28,5 +28,5 @@ export default async function createQuestionCollection() {
     databases.createIndex(dbID, questionCollectionID, "title", IndexType.Fulltext, ["title"], ["asc"]),
     databases.createIndex(dbID, questionCollectionID, "content", IndexType.Fulltext, ["content"], ["asc"])
   ]);
-  console.log("\"Question collection index assigned");
+  console.log("Question collection index assigned");
 }
