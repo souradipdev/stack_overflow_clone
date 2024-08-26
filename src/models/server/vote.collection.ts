@@ -1,0 +1,24 @@
+import {IndexType, Permission} from "node-appwrite";
+import {dbID, voteCollectionID} from "@/ids";
+import {db, voteCollection} from "@/name";
+import {databases} from "@/models/server/config";
+
+export default async function createVoteCollection() {
+  await databases.createCollection(dbID, voteCollectionID, voteCollection, [
+    Permission.create("users"),
+    Permission.read("any"),
+    Permission.read("users"),
+    Permission.update("users"),
+    Permission.delete("users"),
+  ]);
+  console.log("Vote Collection Created");
+
+  await Promise.all([
+    databases.createEnumAttribute(dbID, voteCollectionID, "type", ["question", "answer"], true),
+    databases.createStringAttribute(dbID, voteCollectionID, "typeId", 50, true),
+    databases.createEnumAttribute(dbID, voteCollectionID, "voteStatus", ["upvoted", "downvoted"], true),
+    databases.createStringAttribute(dbID, voteCollectionID, "votedById", 50, true),
+  ]);
+
+  console.log("Vote Attributes Created");
+}
