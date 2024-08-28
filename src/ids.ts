@@ -1,9 +1,10 @@
 import {nanoid} from "nanoid";
+import id from "@/json/ids.json";
 
-export const dbID = nanoid();
-export const questionCollectionID = nanoid();
-export const answerCollectionID = nanoid();
-export const commentCollectionID = nanoid();
-export const voteCollectionID = nanoid();
+export const dbID = id.dbID;
+export const questionCollectionID = id.questionCollectionID;
+export const answerCollectionID = id.answerCollectionID;
+export const commentCollectionID = id.commentCollectionID;
+export const voteCollectionID = id.voteCollectionID;
 
-export const questionAttachmentBucketID = nanoid();
+export const questionAttachmentBucketID = id.questionAttachmentBucketID;
