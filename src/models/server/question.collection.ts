@@ -8,10 +8,10 @@ export default async function createQuestionCollection() {
   await databases.createCollection(dbID, questionCollectionID, questionCollection, [
     Permission.read("any"),
     Permission.read("users"),
-    Permission.write("users"),
     Permission.create("users"),
+    Permission.delete("users"),
     Permission.update("users"),
-    Permission.delete("users")
+    Permission.write("users")
   ])
   console.log("Question collection created");
 
@@ -24,9 +24,9 @@ export default async function createQuestionCollection() {
   ]);
   console.log("Question collection attributes created");
 
-  await Promise.all([
+ /* await Promise.all([
     databases.createIndex(dbID, questionCollectionID, "title", IndexType.Fulltext, ["title"], ["asc"]),
     databases.createIndex(dbID, questionCollectionID, "content", IndexType.Fulltext, ["content"], ["asc"])
   ]);
-  console.log("Question collection index assigned");
+  console.log("Question collection index assigned");*/
 }

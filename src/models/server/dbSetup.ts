@@ -8,9 +8,10 @@ import {db} from "@/name";
 
 export default async function getOrCreateDB() {
   try {
-    await databases.get(dbID);
+    await databases.get(`NY2xkFYQnjQJFx1gGlS7O`);
     console.log("Database exists");
   } catch (error) {
+    // console.log("sdahgfd: ", error);
     try {
       await databases.create(dbID, db);
       console.log("Database created");

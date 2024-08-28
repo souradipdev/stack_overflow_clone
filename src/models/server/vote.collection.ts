@@ -5,11 +5,12 @@ import {databases} from "@/models/server/config";
 
 export default async function createVoteCollection() {
   await databases.createCollection(dbID, voteCollectionID, voteCollection, [
-    Permission.create("users"),
     Permission.read("any"),
     Permission.read("users"),
-    Permission.update("users"),
+    Permission.create("users"),
     Permission.delete("users"),
+    Permission.update("users"),
+    Permission.write("users")
   ]);
   console.log("Vote Collection Created");
 

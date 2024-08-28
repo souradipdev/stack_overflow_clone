@@ -4,7 +4,8 @@ import {Client, Storage, Databases, Avatars, Account} from "node-appwrite";
 
 const client = new Client()
 .setEndpoint(env.appwrite.endpoint)
-.setProject(env.appwrite.projectId);
+.setProject(env.appwrite.projectId)
+.setKey(env.appwrite.apiKey)
 
 const databases = new Databases(client);
 const account = new Account(client);
