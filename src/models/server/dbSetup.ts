@@ -8,8 +8,9 @@ import {db} from "@/name";
 
 export default async function getOrCreateDB() {
   try {
-    await databases.get(`NY2xkFYQnjQJFx1gGlS7O`);
+    await databases.get(dbID);
     console.log("Database exists");
+    return true;
   } catch (error) {
     // console.log("sdahgfd: ", error);
     try {
@@ -23,9 +24,10 @@ export default async function getOrCreateDB() {
       ]);
       // console.log("Collection created");
       console.log("Database connected");
+      return true;
     } catch (error) {
       console.log("Error creating databases or collection", error)
-
+      return false;
     }
   }
 }

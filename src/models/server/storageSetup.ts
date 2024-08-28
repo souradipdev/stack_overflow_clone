@@ -5,8 +5,9 @@ import {storage} from "@/models/server/config";
 
 export default async function getOrCreateStorage() {
   try {
-    await storage.getBucket(`M9GiRSgA4M6PnBYaYgPYd`);
-    console.log("Storage connected")
+    await storage.getBucket(questionAttachmentBucketID);
+    console.log("Storage connected");
+    return true;
   } catch (error) {
     try {
       await storage.createBucket(questionAttachmentBucketID, questionAttachmentBucket, [
@@ -20,9 +21,11 @@ export default async function getOrCreateStorage() {
       );
       console.log("Storage Created");
       console.log("Storage Connected");
+      return true;
 
     } catch (error) {
       console.log("Error creating storage ", error);
+      return false;
     }
   }
 }

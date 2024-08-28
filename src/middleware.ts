@@ -2,28 +2,25 @@ import {NextRequest, NextResponse} from "next/server";
 import getOrCreateDB from "@/models/server/dbSetup";
 import getOrCreateStorage from "@/models/server/storageSetup";
 
-let isDbSetupComplete = false;
-let isStorageSetupComplete = false;
+let isDbSetupComplete: boolean = false;
+let isStorageSetupComplete: boolean = false;
 
 
 export default async function middleware(request: NextRequest) {
 
   try {
     if (!isDbSetupComplete) {
-      await getOrCreateStorage();
-      isDbSetupComplete = true;
+      isDbSetupComplete = await getOrCreateStorage();
     }
     if (!isStorageSetupComplete) {
-      await getOrCreateDB();
-      isStorageSetupComplete = true;
+      isStorageSetupComplete = await getOrCreateDB();
     }
+
     console.log("Middleware invoked");
     return NextResponse.next();
   } catch (error) {
     console.log("Middleware error: ", error);
   }
-
-
 }
 
 
