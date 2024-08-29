@@ -16,7 +16,7 @@ export default async function middleware(request: NextRequest) {
       isStorageSetupComplete = await getOrCreateDB();
     }
 
-    console.log("Middleware invoked");
+    // console.log("Middleware invoked");
     return NextResponse.next();
   } catch (error) {
     console.log("Middleware error: ", error);
