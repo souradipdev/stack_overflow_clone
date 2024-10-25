@@ -4,9 +4,13 @@ import {questionCollection} from "@/name";
 import {databases} from "@/models/server/config";
 import {dbID, questionCollectionID} from "@/ids";
 
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export default async function createQuestionCollection() {
 
-  try{
+  try {
     await databases.createCollection(dbID, questionCollectionID, questionCollection, [
       Permission.read("any"),
       Permission.read("users"),
@@ -26,13 +30,14 @@ export default async function createQuestionCollection() {
     ]);
     console.log("Question collection attributes created");
 
-    /* await Promise.all([
-       databases.createIndex(dbID, questionCollectionID, "title", IndexType.Fulltext, ["title"], ["asc"]),
-       databases.createIndex(dbID, questionCollectionID, "content", IndexType.Fulltext, ["content"], ["asc"])
-     ]);
-     console.log("Question collection index assigned");*/
-  }
-  catch (error) {
+    await delay(3000);
+
+    await Promise.all([
+      databases.createIndex(dbID, questionCollectionID, "title", IndexType.Fulltext, ["title"], ["asc"]),
+      databases.createIndex(dbID, questionCollectionID, "content", IndexType.Fulltext, ["content"], ["asc"],)
+    ]);
+    console.log("Question collection index assigned");
+  } catch (error) {
     console.log("Question collection error: ");
     console.log(error);
   }
